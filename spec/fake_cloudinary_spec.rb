@@ -45,7 +45,7 @@ RSpec.describe FakeCloudinary do
     it "returns stub host" do
       port = 12345
       allow(described_class::App).to receive(:port).and_return(port)
-      expected_host = "localhost:#{port}"
+      expected_host = "http://localhost:#{port}"
 
       result = described_class.host
 
