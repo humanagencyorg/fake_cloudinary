@@ -71,6 +71,38 @@ RSpec.describe FakeCloudinary do
 
       expect { given_block.call }.to raise_error(ArgumentError)
     end
+
+    context "if no CLOUDINARY_URL provided" do
+      it "modifies cloudinary env variable with default" do
+        stub_web_mock
+        allow(described_class::App).to receive(:boot_once)
+
+        expected_variable = "cloudinary://username:api_key@test_cloud_name"
+
+        given_block = lambda do
+          expect(ENV["CLOUDINARY_URL"]).to eq(expected_variable)
+        end
+
+        expect { described_class.boot &given_block }.not_to raise_error
+      end
+    end
+
+    context "if CLOUDINARY_URL provided" do
+      it "uses provided variable" do
+        stub_web_mock
+        allow(described_class::App).to receive(:boot_once)
+
+        custom_url = "custom_url"
+
+        given_block = lambda do
+          expect(ENV["CLOUDINARY_URL"]).to eq(custom_url)
+        end
+
+        ClimateControl.modify(CLOUDINARY_URL: custom_url) do
+          described_class.boot &given_block
+        end
+      end
+    end
   end
 
   describe ".host" do

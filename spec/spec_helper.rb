@@ -3,6 +3,7 @@ ENV["RACK_ENV"] = "test"
 require "bundler/setup"
 require "webmock/rspec"
 
+require "climate_control"
 require "fake_cloudinary"
 
 RSpec.configure do |config|
