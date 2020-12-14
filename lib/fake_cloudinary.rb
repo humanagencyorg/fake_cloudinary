@@ -6,7 +6,7 @@ module FakeCloudinary
   require_relative "fake_cloudinary/app"
 
   CDN_HOST = "http://localhost"
-  DEFAULT_CLOUDINARY_URL = "cloudinary://username:api_key@test_cloud_name"
+  DEFAULT_CLOUDINARY_URL = "cloudinary://224582571721794:KjttkIKm-WPchDLqY26b-oM2f_g@test_cloud_name"
 
   def self.boot
     # TODO: improve error
@@ -20,7 +20,6 @@ module FakeCloudinary
 
     RSpec::Mocks.with_temporary_scope do
       Overrides.stub_download_prefix
-      ENV["CLOUDINARY_URL"] ||= DEFAULT_CLOUDINARY_URL
       yield
       Overrides.remove_stub_download_prefix
     end

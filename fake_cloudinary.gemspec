@@ -43,6 +43,5 @@ Gem::Specification.new do |spec| # rubocop:disable Metrics/BlockLength
   spec.add_runtime_dependency "sinatra", "~> 2.0"
   spec.add_runtime_dependency "webmock"
 
-  spec.add_dependency "climate_control"
   spec.add_dependency "rspec", "~> 3.0"
 end
