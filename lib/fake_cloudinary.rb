@@ -2,17 +2,24 @@
 
 module FakeCloudinary
   require "webmock"
-  require_relative "fake_cloudinary/cloudinary_patch"
+  require_relative "fake_cloudinary/overrides"
   require_relative "fake_cloudinary/app"
 
   CDN_HOST = "http://localhost"
 
   def self.boot
+    # TODO: improve error
+    raise ArgumentError unless block_given?
+
     reset_storage!
 
     stub_requests
 
-    App.boot_once
+    FakeCloudinary::App.boot_once
+
+    Overrides.stub_download_prefix
+    yield
+    Overrides.remove_stub_download_prefix
   end
 
   def self.host

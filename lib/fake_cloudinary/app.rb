@@ -19,30 +19,4 @@ module FakeCloudinary
       redirect link_to_file
     end
   end
-
-  def self.boot
-    reset_storage!
-
-    stub_requests
-
-    FakeCloudinary::App.boot_once
-  end
-
-  def self.host
-    "http://localhost:#{App.port}"
-  end
-
-  def self.storage
-    @storage
-  end
-
-  def self.reset_storage!
-    @storage = {}
-  end
-
-  def self.stub_requests
-    WebMock::API.
-      stub_request(:post, /api.cloudinary.com/).
-      to_rack(FakeCloudinary::App)
-  end
 end

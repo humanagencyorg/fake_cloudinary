@@ -11,7 +11,7 @@ RSpec.describe FakeCloudinary do
       stub_web_mock
       allow(described_class::App).to receive(:boot_once)
 
-      expect { described_class.boot }.
+      expect { described_class.boot {} }.
         to change { described_class.storage.empty? }.
         from(false).
         to(true)
@@ -21,7 +21,7 @@ RSpec.describe FakeCloudinary do
       webmock_stub = stub_web_mock
       allow(described_class::App).to receive(:boot_once)
 
-      described_class.boot
+      described_class.boot {}
 
       expect(WebMock::API).
         to have_received(:stub_request).
@@ -35,9 +35,41 @@ RSpec.describe FakeCloudinary do
       stub_web_mock
       allow(described_class::App).to receive(:boot_once)
 
-      described_class.boot
+      described_class.boot {}
 
       expect(described_class::App).to have_received(:boot_once)
+    end
+
+    it "stubs Cloudinary with overrides" do
+      stub_web_mock
+      allow(described_class::App).to receive(:boot_once)
+      allow(described_class::Overrides).to receive(:stub_download_prefix)
+
+      described_class.boot {}
+
+      expect(described_class::Overrides).to have_received(:stub_download_prefix)
+    end
+
+    it "unstubs Cloudinary with overrides" do
+      stub_web_mock
+      allow(described_class::App).to receive(:boot_once)
+      allow(described_class::Overrides).to receive(:remove_stub_download_prefix)
+
+      described_class.boot {}
+
+      expect(described_class::Overrides).
+        to have_received(:remove_stub_download_prefix)
+    end
+
+    it "removes Cloudinary overrides after block execution" do
+      stub_web_mock
+      allow(described_class::App).to receive(:boot_once)
+
+      given_block = -> { Cloudinary::Utils.unsigned_download_url_prefix }
+
+      expect { described_class.boot &given_block }.not_to raise_error
+
+      expect { given_block.call }.to raise_error(ArgumentError)
     end
   end
 
