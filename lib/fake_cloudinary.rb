@@ -17,9 +17,11 @@ module FakeCloudinary
 
     FakeCloudinary::App.boot_once
 
-    Overrides.stub_download_prefix
-    yield
-    Overrides.remove_stub_download_prefix
+    RSpec::Mocks.with_temporary_scope do
+      Overrides.stub_download_prefix
+      yield
+      Overrides.remove_stub_download_prefix
+    end
   end
 
   def self.host
