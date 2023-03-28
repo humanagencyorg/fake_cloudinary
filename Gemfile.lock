@@ -5,7 +5,7 @@ PATH
       capybara
       cloudinary
       rspec (~> 3.0)
-      sinatra (~> 3.0)
+      sinatra (>= 2.2.2)
       webmock
 
 GEM

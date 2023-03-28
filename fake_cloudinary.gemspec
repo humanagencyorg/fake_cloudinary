@@ -40,7 +40,7 @@ Gem::Specification.new do |spec| # rubocop:disable Metrics/BlockLength
 
   spec.add_runtime_dependency "capybara"
   spec.add_runtime_dependency "cloudinary"
-  spec.add_runtime_dependency "sinatra", "~> 3.0"
+  spec.add_runtime_dependency "sinatra", ">= 2.2.2"
   spec.add_runtime_dependency "webmock"
 
   spec.add_dependency "rspec", "~> 3.0"
