@@ -12,7 +12,7 @@ Gem::Specification.new do |spec| # rubocop:disable Metrics/BlockLength
   spec.homepage      = "https://github.com/humanagencyorg/twilio_stub"
   spec.license       = "MIT"
 
-  spec.required_ruby_version = ">= 2.6"
+  spec.required_ruby_version = ">= 2.7"
 
   if spec.respond_to?(:metadata)
     spec.metadata["homepage_uri"] = spec.homepage
@@ -40,7 +40,7 @@ Gem::Specification.new do |spec| # rubocop:disable Metrics/BlockLength
 
   spec.add_runtime_dependency "capybara"
   spec.add_runtime_dependency "cloudinary"
-  spec.add_runtime_dependency "sinatra", "~> 2.0"
+  spec.add_runtime_dependency "sinatra", "~> 3.0"
   spec.add_runtime_dependency "webmock"
 
   spec.add_dependency "rspec", "~> 3.0"

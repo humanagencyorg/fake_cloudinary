@@ -19,4 +19,3 @@ module FakeCloudinary
     end
   end
 end
-

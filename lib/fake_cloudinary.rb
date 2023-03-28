@@ -6,7 +6,7 @@ module FakeCloudinary
   require_relative "fake_cloudinary/app"
 
   CDN_HOST = "http://localhost"
-  DEFAULT_CLOUDINARY_URL = "cloudinary://224582571721794:KjttkIKm-WPchDLqY26b-oM2f_g@test_cloud_name"
+  DEFAULT_CLOUDINARY_URL = "cloudinary://224582571721794:KjttkIKm-WPchDLqY26b-oM2f_g@test_cloud_name" # rubocop:disable Metrics/LineLength
 
   def self.boot
     # TODO: improve error

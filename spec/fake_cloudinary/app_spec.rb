@@ -3,15 +3,15 @@
 require "rack/test"
 require "spec_helper"
 
-RSpec.describe FakeCloudinary::App do
-  module RSpecMixin
-    include Rack::Test::Methods
+module RSpecMixin
+  include Rack::Test::Methods
 
-    def app
-      described_class
-    end
+  def app
+    described_class
   end
+end
 
+RSpec.describe FakeCloudinary::App do
   before do
     FakeCloudinary.reset_storage!
 
